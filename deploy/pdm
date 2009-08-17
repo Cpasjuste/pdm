@@ -7,7 +7,7 @@ PIDFILE="/var/run/pdm.pid"
 case "$1" in
   start)
 	echo "Starting Pandora Display Manager: pdm"
-	/pdm/pdm &
+	/pdm/pdm /pdm/ &
   ;;
 
   stop)

@@ -27,37 +27,18 @@ int cfg_read(char *file)
 		}
 		else
 		{
-			config_setting_t *tmp = config_setting_get_member (search, "items_count");
-			if (tmp)
-			{
-				general->items_count=config_setting_get_int(tmp);
-				printf("items_count = %i\n", general->items_count);
-			}
-
-			tmp = config_setting_get_member(search, "autoboot_item");
+			config_setting_t *tmp = config_setting_get_member(search, "autoboot_item");
 			if(tmp)
-			{ 
-				strcpy(general->autoboot_item, config_setting_get_string(tmp));
-
-				for(i=0; i<general->items_count; i++)
-				{
-					char tmpItem[256];
-					sprintf(tmpItem, "item%i", i); 
-					if(strcmp(general->autoboot_item, tmpItem) == 0) general->item_to_boot = i;		
-				}
-				printf("autoboot_item = %s (%i)\n", general->autoboot_item, general->item_to_boot);
-
-			} else general->item_to_boot = -1;
+				general->autoboot_item = config_setting_get_int(tmp);
+			else
+				general->autoboot_item = -1;
 
 			tmp = config_setting_get_member (search, "scrolling_text_y");
 			if (tmp)
-			{
-				general->scrolling_text_y=config_setting_get_int(tmp);
-				printf("scrolling_text_y = %i\n", general->scrolling_text_y);
-			}
+				general->scrolling_text_y = config_setting_get_int(tmp);
 		}	
 
-		for(i=0; i<general->items_count; i++)
+		for(i = 0; i < 9; i++ )
 		{
 			char tmpItem[256];
 			sprintf(tmpItem, "item%i", i); 
@@ -106,6 +87,8 @@ int cfg_read(char *file)
 					item->standalone[i]=config_setting_get_int(tmp);
 					printf("standalone->%i = %i\n", i, item->standalone[i]);
 				}
+
+				items_count++;
 			}
 		}
 	}

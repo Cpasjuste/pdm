@@ -23,7 +23,7 @@ LIBS	  = -L$(PNDSDK)/usr/lib -lconfig_pnd -lIMGegl -lsrv_um -lXau -lXdmcp -lXi -
 		-lX11 -lGLES_CM -lGLES2D -lSDL13 -lpng -ltiff -ljpeg -lfreetype -lstdc++ -lz
 endif
 
-OBJECTS   = main.o config.o
+OBJECTS   = main.o config.o utils.o
 
 all: $(NAME)
 
