@@ -17,8 +17,6 @@ typedef struct
 	char icon_path[15][256];
 	int icon_x[15];
 	int icon_y[15];
-	int icon_w[15];
-	int icon_h[15];
 	int standalone[15];
 
 } PER_ITEM_CONFIG;

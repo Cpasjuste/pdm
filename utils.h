@@ -8,5 +8,6 @@ char pdm_dir[512];
 
 int write_pid();
 char *pdm_dir_and( char *path );
+char *str_sub (const char *s, unsigned int start, unsigned int end);
 
 #endif

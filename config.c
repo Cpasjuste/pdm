@@ -96,3 +96,4 @@ int cfg_read(char *file)
 
 	return 0;
 }
+

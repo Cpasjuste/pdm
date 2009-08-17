@@ -46,4 +46,29 @@ char *pdm_dir_and( char *path )
 	return new_path;
 }
 
+char *str_sub (const char *s, unsigned int start, unsigned int end)
+{
+	char *new_s = NULL;
+
+	if (s != NULL && start < end)
+	{
+		new_s = malloc (sizeof (*new_s) * (end - start + 2));
+		if (new_s != NULL)
+		{
+			int i;
+			for (i = start; i <= end; i++)
+			{
+				new_s[i-start] = s[i];
+			}
+			new_s[i-start] = '\0';
+		}
+		else
+		{
+			printf ("Fail -> str_sub\n");
+		}
+	}
+   	return new_s;
+}
+
+
 

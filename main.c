@@ -10,6 +10,8 @@
 #include "config.h"
 #include "utils.h"
 
+int gui_done = 0;
+
 int gui_init()
 {
 	putenv ("SDL_MOUSEDRV=TSLIB");
@@ -35,6 +37,7 @@ void gui_load()
 	font = GLES2D_LoadTTFont( pdm_dir_and( "data/gui/font.ttf" ), 16 );
 
 	scroll_count = 600;
+
 }
 
 void gui_clean()
@@ -70,6 +73,11 @@ void gui_app_exec(int n)
 	pid_t childpid;
 	int status;
 
+	int lenght = strlen ( item->exec_path[n] );
+
+	while ( item->exec_path[n][lenght] != '/' )
+		lenght--;
+
 	gui_clean();
 
 	if ((childpid = fork()) == -1)
@@ -78,7 +86,7 @@ void gui_app_exec(int n)
 	}
 	else if (childpid == 0)
 	{
-   		if (execl(item->exec_path[n], item->exec_path[n], NULL) < 0)
+   		if ( execl( pdm_dir_and("exec.sh"), pdm_dir_and("exec.sh"), item->exec_path[n], str_sub( item->exec_path[n], 0, lenght ), NULL) < 0 )
 		{
 			perror("Exec failed");
 		}
@@ -157,7 +165,6 @@ void gui_draw()
 
 int main( int argc, char *argv[] )
 {
-	int gui_done = 0;
 	selected_item = 0;
 	scroll_count = 800;
 	alpha_up = 1;
@@ -191,7 +198,7 @@ int main( int argc, char *argv[] )
 	gui_init();
 	gui_load();
 
-	while(!gui_done)
+	while( !gui_done )
 	{
 		gui_draw();
 
